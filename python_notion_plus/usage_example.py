@@ -1,10 +1,11 @@
 import json
+import os
 
 from python_notion_plus import NotionClient
 
 
 def main():
-    notion_client = NotionClient(database_id='1f622274-86ac-804c-a13a-ea6a77e6510e')
+    notion_client = NotionClient(database_id=os.getenv("NOTION_DATABASE_ID"))
 
     metadata = notion_client.get_metadata()
     print(f'notion_schema: {metadata}')
