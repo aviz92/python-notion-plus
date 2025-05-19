@@ -118,13 +118,13 @@ class NotionClient:
             ],
         )
 
-    def add_row_to_db(self, name: str, notion_database_id: str) -> None:
+    def add_row_to_db(self, name: str, description: str, notion_database_id: str) -> None:
         self.client.pages.create(
             parent={"database_id": notion_database_id},
             properties={
                 "Done": {"checkbox": False},
                 "Name": {"title": [{"text": {"content": name}}]},
-                "Description": {"rich_text": [{"text": {"content": ""}}]},
+                "Description": {"rich_text": [{"text": {"content": description}}]},
                 "Status": {"status": {"name": "Not started"}},
                 "Type": {"rich_text": []},
                 "Date": {"date": {"start": datetime.datetime.now(pytz.timezone("Asia/Jerusalem")).isoformat()}},
