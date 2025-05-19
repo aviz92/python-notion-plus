@@ -25,8 +25,8 @@ def main():
         properties = notion_client.format_notion_page(page)
         formatted_data = json.dumps(properties, indent=4)
 
-        print(f'notion_page_properties: {formatted_data}')
-        print()
+        print(f'notion_page_properties: {formatted_data}\n')
+
 
 if __name__ == '__main__':
     main()

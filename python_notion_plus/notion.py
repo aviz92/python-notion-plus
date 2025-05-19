@@ -1,7 +1,9 @@
+import datetime
 import logging
 import os
 import re
 from typing import Optional
+import pytz
 
 from notion_client import Client
 
@@ -18,13 +20,6 @@ class NotionClient:
         self.database_id = database_id
 
         self.client = Client(auth=self.token)
-
-    def get_database_schema(self) -> dict:
-        try:
-            return self.client.databases.retrieve(database_id=self.database_id)
-        except Exception as e:
-            self.logger.error(f"Failed to fetch schema: {e}")
-            raise
 
     def get_metadata(self) -> dict:
         """Get metadata of the database."""
@@ -108,3 +103,30 @@ class NotionClient:
             "parent": raw.get("parent"),
             "properties": simplified_props
         }
+
+    def write_to_page(self, message_text: str, notion_page_id: str) -> None:
+        self.client.blocks.children.append(
+            block_id=notion_page_id,
+            children=[
+                {
+                    "object": "block",
+                    "type": "paragraph",
+                    "paragraph": {
+                        "rich_text": [{"type": "text", "text": {"content": message_text}}]
+                    },
+                }
+            ],
+        )
+
+    def add_row_to_db(self, name: str, notion_database_id: str) -> None:
+        self.client.pages.create(
+            parent={"database_id": notion_database_id},
+            properties={
+                "Done": {"checkbox": False},
+                "Name": {"title": [{"text": {"content": name}}]},
+                "Description": {"rich_text": [{"text": {"content": ""}}]},
+                "Status": {"status": {"name": "Not started"}},
+                "Type": {"rich_text": []},
+                "Date": {"date": {"start": datetime.datetime.now(pytz.timezone("Asia/Jerusalem")).isoformat()}},
+            }
+        )
