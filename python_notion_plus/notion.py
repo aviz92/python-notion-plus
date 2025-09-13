@@ -1,9 +1,7 @@
-import datetime
 import logging
 import os
 import re
 from typing import Optional
-import pytz
 
 from notion_client import Client
 
