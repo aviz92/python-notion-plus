@@ -3,6 +3,7 @@ import os
 import re
 from typing import Optional
 
+from custom_python_logger import get_logger
 from notion_client import Client
 
 
@@ -12,7 +13,7 @@ def remove_emojis(text: str) -> str:
 
 class NotionClient:
     def __init__(self, database_id: str, token: str = None):
-        self.logger = logging.getLogger(self.__class__.__name__)
+        self.logger = get_logger(self.__class__.__name__)
 
         self.token = token or os.getenv("NOTION_TOKEN")
         self.database_id = database_id
