@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_version = "0.0.6"
+package_version = "0.0.7"
 
 package_name = "python-notion-plus"
 package_description = "Python wrapper for Notion API"
