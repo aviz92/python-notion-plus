@@ -1,18 +1,16 @@
-import logging
 import os
 import re
-from typing import Optional
 
 from custom_python_logger import get_logger
 from notion_client import Client
 
 
 def remove_emojis(text: str) -> str:
-    return re.sub(r'[\U00010000-\U0010ffff]', '', text).strip()
+    return re.sub(r"[\U00010000-\U0010ffff]", "", text).strip()
 
 
 class NotionClient:
-    def __init__(self, database_id: str, token: str = None):
+    def __init__(self, database_id: str, token: str = None) -> None:
         self.logger = get_logger(self.__class__.__name__)
 
         self.token = token or os.getenv("NOTION_TOKEN")
@@ -29,10 +27,9 @@ class NotionClient:
             self.logger.error(f"Failed to fetch metadata: {e}")
             raise
 
-    def get_database_title(self) -> Optional[str]:
+    def get_database_title(self) -> str | None:
         metadata = self.get_metadata()
-        title = metadata.get("title", [])
-        if title:
+        if title := metadata.get("title", []):
             return title[0].get("plain_text", "")
         return None
 
@@ -64,7 +61,8 @@ class NotionClient:
             self.logger.error(f"Failed to fetch page properties: {e}")
             raise
 
-    def format_notion_page(self, raw: dict) -> dict:
+    @staticmethod
+    def format_notion_page(raw: dict) -> dict:  # pylint: disable=R1260
         props = raw.get("properties", {})
         simplified_props = {}
 
@@ -100,7 +98,7 @@ class NotionClient:
             "url": raw.get("url"),
             "archived": raw.get("archived"),
             "parent": raw.get("parent"),
-            "properties": simplified_props
+            "properties": simplified_props,
         }
 
     def write_to_page(self, message_text: str, notion_page_id: str) -> None:
@@ -110,15 +108,10 @@ class NotionClient:
                 {
                     "object": "block",
                     "type": "paragraph",
-                    "paragraph": {
-                        "rich_text": [{"type": "text", "text": {"content": message_text}}]
-                    },
+                    "paragraph": {"rich_text": [{"type": "text", "text": {"content": message_text}}]},
                 }
             ],
         )
 
     def add_row_to_db(self, notion_database_id: str, properties: dict) -> None:
-        self.client.pages.create(
-            parent={"database_id": notion_database_id},
-            properties=properties
-        )
+        self.client.pages.create(parent={"database_id": notion_database_id}, properties=properties)
