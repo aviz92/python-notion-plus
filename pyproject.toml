@@ -1,3 +1,44 @@
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-notion-plus"
+version = "0.0.8"
+description = "Python wrapper for Notion API"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Avi Zaguri" },]
+keywords = ["development", "notion", "notion-api", "notion-sdk", "notion-integration"]
+
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.11",
+    "Operating System :: OS Independent",
+    "Topic :: System :: Logging",
+]
+
+dependencies = [
+    "custom-python-logger>=2.0.10",
+    "notion-client>=2.7.0",
+    "pre-commit>=4.5.0",
+    "pytest>=9.0.1",
+    "python-dotenv>=1.2.1",
+    "pytz>=2025.2",
+    "retrying>=1.4.2",
+    "setuptools>=80.9.0",
+    "twine>=6.2.0",
+    "wheel>=0.45.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/aviz92/python-notion-plus"
+Repository = "https://github.com/aviz92/python-notion-plus"
+Issues = "https://github.com/aviz92/python-notion-plus/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["python_notion_plus*"]
+namespaces = false
