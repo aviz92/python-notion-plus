@@ -4,20 +4,20 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "python-notion-plus"
-version = "0.0.8"
+version = "0.0.9"
 description = "Python wrapper for Notion API"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [{ name = "Avi Zaguri" },]
 keywords = ["development", "notion", "notion-api", "notion-sdk", "notion-integration"]
 
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
-    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Operating System :: OS Independent",
-    "Topic :: System :: Logging",
+    "Topic :: System :: Notion",
 ]
 
 dependencies = [
