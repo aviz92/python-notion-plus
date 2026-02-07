@@ -1,3 +1,12 @@
+![PyPI version](https://img.shields.io/pypi/v/python-notion-plus)
+![Python](https://img.shields.io/badge/python->=3.12-blue)
+![Development Status](https://img.shields.io/badge/status-stable-green)
+![Maintenance](https://img.shields.io/maintenance/yes/2026)
+![PyPI](https://img.shields.io/pypi/dm/python-notion-plus)
+![License](https://img.shields.io/pypi/l/python-notion-plus)
+
+---
+
 # python-notion-plus
 An enhanced Python client for the Notion API, providing a more user-friendly interface and additional features.
 
