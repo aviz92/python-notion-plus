@@ -4,7 +4,7 @@ import re
 from custom_python_logger import get_logger
 from notion_client import Client
 
-from python_notion_plus.const import LOGGER_NAME
+from python_notion_plus.consts import LOGGER_NAME
 
 
 def remove_emojis(text: str) -> str:
