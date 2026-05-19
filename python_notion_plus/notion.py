@@ -4,6 +4,8 @@ import re
 from custom_python_logger import get_logger
 from notion_client import Client
 
+from python_notion_plus.const import LOGGER_NAME
+
 
 def remove_emojis(text: str) -> str:
     return re.sub(r"[\U00010000-\U0010ffff]", "", text).strip()
@@ -11,7 +13,7 @@ def remove_emojis(text: str) -> str:
 
 class NotionClient:
     def __init__(self, database_id: str, token: str = None) -> None:
-        self.logger = get_logger(self.__class__.__name__)
+        self.logger = get_logger(LOGGER_NAME)
 
         self.token = token or os.getenv("NOTION_TOKEN")
         self.database_id = database_id
